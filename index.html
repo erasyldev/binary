@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Двоичный код ↔ Текст</title>
+<style>
+    body {
+        font-family: "Segoe UI", sans-serif;
+        background: #0d1117;
+        color: #e6edf3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+    }
+
+    h1 {
+        color: #58a6ff;
+        margin-bottom: 20px;
+        font-weight: 500;
+    }
+
+    textarea {
+        width: 90%;
+        max-width: 800px;
+        height: 120px;
+        background: #161b22;
+        color: #e6edf3;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 16px;
+        resize: none;
+        margin: 10px 0;
+        outline: none;
+        transition: border 0.3s;
+    }
+
+    textarea:focus {
+        border: 1px solid #58a6ff;
+    }
+
+    .buttons {
+        margin: 15px 0;
+    }
+
+    button {
+        background: #238636;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 6px;
+        margin: 5px;
+        transition: background 0.3s;
+    }
+
+    button:hover {
+        background: #2ea043;
+    }
+</style>
+</head>
+<body>
+
+<h1>Двоичный код ↔ Текст</h1>
+
+<textarea id="input" placeholder="Введите текст или двоичный код..."></textarea>
+
+<div class="buttons">
+    <button onclick="textToBinary()">Текст → Двоичный</button>
+    <button onclick="binaryToText()">Двоичный → Текст</button>
+</div>
+
+<textarea id="output" placeholder="Результат..." readonly></textarea>
+
+<script>
+function textToBinary() {
+    let text = document.getElementById("input").value;
+    let binary = text.split("").map(char =>
+        char.charCodeAt(0).toString(2).padStart(8, "0")
+    ).join(" ");
+    document.getElementById("output").value = binary;
+}
+
+function binaryToText() {
+    let binary = document.getElementById("input").value.trim().split(/\s+/);
+    let text = binary.map(bin =>
+        String.fromCharCode(parseInt(bin, 2))
+    ).join("");
+    document.getElementById("output").value = text;
+}
+</script>
+
+</body>
+</html>
